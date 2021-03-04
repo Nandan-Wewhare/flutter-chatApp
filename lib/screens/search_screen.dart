@@ -83,6 +83,16 @@ class _SearchScreenState extends State<SearchScreen> {
                               "owner": FirebaseAuth.instance.currentUser.email,
                               "to": searchResults[index].data()["email"]
                             });
+                            FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(searchResults[index].data()["email"])
+                                .collection("chats")
+                                .doc(FirebaseAuth.instance.currentUser.email)
+                                .set({
+                              "id": uuid.v1(),
+                              "owner": searchResults[index].data()["email"],
+                              "to": FirebaseAuth.instance.currentUser.email
+                            });
                             Get.off(
                                 ChatRoom(searchResults[index].data()["email"]));
                           } else {

@@ -10,7 +10,12 @@ import 'package:get/get.dart';
 
 import 'chat_screen.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +62,14 @@ class Home extends StatelessWidget {
         ),
       ),
       body: Center(
-          child: FutureBuilder(
-        future: FirebaseFirestore.instance
+          child: StreamBuilder(
+        stream: FirebaseFirestore.instance
             .collection("users")
             .doc(FirebaseAuth.instance.currentUser.email)
             .collection("chats")
-            .get(),
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
             return ListView.separated(
               separatorBuilder: (context, index) {
                 return Divider(
