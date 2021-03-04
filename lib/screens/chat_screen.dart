@@ -33,10 +33,6 @@ class _ChatRoomState extends State<ChatRoom> {
                 if (snapshot.hasData) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                      print("sender = " +
-                          snapshot.data.docs[index].data()["sender"] +
-                          " receiver = " +
-                          FirebaseAuth.instance.currentUser.email);
                       return MessageTile(
                           message: snapshot.data.docs[index].data()["content"],
                           sendByMe:
