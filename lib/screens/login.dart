@@ -3,7 +3,6 @@ import 'package:chatapp_trial/screens/signup.dart';
 import 'package:chatapp_trial/services/app_methods.dart';
 import 'package:chatapp_trial/services/auth_service.dart';
 import 'package:chatapp_trial/services/preferences.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -146,14 +145,13 @@ class _LoginState extends State<Login> {
                             .loginWithGoogle();
                         AppMethods.showBusy(context, false);
                         if (Provider.of<AuthService>(context, listen: false)
-                                .userData
-                                .user
-                                .displayName !=
+                                .userData !=
                             null) {
                           Get.off(Home());
                           Preferences().setLogin();
                         } else {
-                          Get.rawSnackbar(message: 'SomeError Occurred');
+                          AppMethods.showBusy(context, false);
+                          Get.rawSnackbar(message: 'Login with Google failed.');
                         }
                       },
                       child: Text(

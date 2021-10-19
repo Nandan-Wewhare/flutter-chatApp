@@ -33,9 +33,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  googleSignOut() async {
-    await GoogleSignIn().signOut();
-  }
+  googleSignOut() async => await GoogleSignIn().signOut();
 
   normalSignup(String email, String password) async {
     try {

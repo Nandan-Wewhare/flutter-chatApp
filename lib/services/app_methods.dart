@@ -7,11 +7,14 @@ class AppMethods {
       Navigator.of(context).push(PageRouteBuilder(
           opaque: false,
           pageBuilder: (BuildContext context, _, __) {
-            return Scaffold(
-              backgroundColor: Colors.black.withOpacity(0.6),
-              body: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                  child: Center(child: CircularProgressIndicator())),
+            return WillPopScope(
+              onWillPop: () => Future.value(false),
+              child: Scaffold(
+                backgroundColor: Colors.black.withOpacity(0.6),
+                body: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                    child: Center(child: CircularProgressIndicator())),
+              ),
             );
           }));
     } else
