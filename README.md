@@ -1,4 +1,4 @@
-# chatapp_trial
+# Flutter chatapp
 
 A new Flutter project.
 
